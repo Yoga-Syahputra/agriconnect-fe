@@ -54,7 +54,7 @@ const Login = () => {
               </label>
               <input
                 type="text"
-                placeholder="Type your e-mail or phone number"
+                placeholder="Masukkan email atau kata sandi"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:ring focus:ring-[#132A13] transition"
               />
             </div>
@@ -66,7 +66,7 @@ const Login = () => {
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
-                  placeholder="Type your password"
+                  placeholder="Masukkan kata sandi"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:ring focus:ring-[#132A13] transition"
                 />
                 <button
@@ -85,7 +85,7 @@ const Login = () => {
                   type="checkbox"
                   className="mr-2 h-4 w-4 text-[#132A13] rounded"
                 />
-                <label className="text-gray-600">Ingat</label>
+                <label className="text-gray-600">Ingat saya</label>
               </div>
               <Link
                 to="/forgot-password"

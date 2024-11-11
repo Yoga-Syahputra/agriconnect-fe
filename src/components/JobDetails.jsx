@@ -7,15 +7,15 @@ const JobDetails = ({ job }) => {
       <p className="text-gray-600">{job.company}</p>
       <p className="text-gray-600 mb-2">{job.location}</p>
       <p className="flex items-center mb-2">
-        <span className="material-icons text-gray-600 mr-2">location_on</span>
+        <span className="material-icons text-gray-600 mr-2">Location</span>
         {job.details?.jobType}
       </p>
       <p className="flex items-center mb-2">
-        <span className="material-icons text-gray-600 mr-2">schedule</span>
+        <span className="material-icons text-gray-600 mr-2">Schedule</span>
         {job.details?.employmentType}
       </p>
       <p className="flex items-center mb-4">
-        <span className="material-icons text-gray-600 mr-2">attach_money</span>
+        <span className="material-icons text-gray-600 mr-2">Salary</span>
         {job.details?.salary}
       </p>
       <button className="w-full bg-green-600 text-white py-2 rounded-md mb-2">

@@ -8,7 +8,7 @@ const Privacy = () => {
       <Navbar />
       <main className="flex-grow container mx-auto py-8">
         <h1 className="text-3xl font-bold mb-6">Kebijakan Privasi</h1>
-        {/* Tambahkan konten kebijakan privasi di sini */}
+        {/* Privacy content */}
       </main>
       <Footer />
     </div>

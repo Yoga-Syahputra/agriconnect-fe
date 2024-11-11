@@ -8,7 +8,7 @@ const Terms = () => {
       <Navbar />
       <main className="flex-grow container mx-auto py-8">
         <h1 className="text-3xl font-bold mb-6">Syarat dan Ketentuan</h1>
-        {/* Tambahkan konten syarat dan ketentuan di sini */}
+        {/* Terms and conditions content */}
       </main>
       <Footer />
     </div>

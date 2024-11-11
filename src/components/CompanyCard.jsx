@@ -1,5 +1,5 @@
 import React from "react";
-import Secondary from "./SecondaryButton";
+import SecondaryButton from "./SecondaryButton";
 
 const CompanyCard = ({ logo, name, category, location }) => (
   <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">

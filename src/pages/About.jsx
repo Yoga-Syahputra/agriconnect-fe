@@ -8,7 +8,7 @@ const About = () => {
       <Navbar />
       <main className="flex-grow container mx-auto py-8">
         <h1 className="text-3xl font-bold mb-6">Tentang Kami</h1>
-        {/* Tambahkan konten tentang perusahaan di sini */}
+        {/* About Content */}
       </main>
       <Footer />
     </div>

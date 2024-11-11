@@ -8,7 +8,7 @@ const FAQ = () => {
       <Navbar />
       <main className="flex-grow container mx-auto py-8">
         <h1 className="text-3xl font-bold mb-6">FAQ</h1>
-        {/* Tambahkan daftar FAQ di sini */}
+        {/* FAQ content */}
       </main>
       <Footer />
     </div>

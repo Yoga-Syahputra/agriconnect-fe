@@ -1,9 +1,9 @@
-
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import JobListings from "../components/JobListings";
 import JobDetails from "../components/JobDetails";
+import { Search, University, Tractor } from "lucide-react";
 
 const jobListingsData = [
   {
@@ -65,21 +65,30 @@ const JobListing = () => {
             Temukan Pekerjaan Impianmu!
           </h1>
           <div className="flex space-x-4">
-            <input
-              type="text"
-              placeholder="Pekerjaan impianmu?"
-              className="p-3 rounded-md bg-white text-gray-800 w-64"
-            />
-            <input
-              type="text"
-              placeholder="Klasifikasi pendidikanmu?"
-              className="p-3 rounded-md bg-white text-gray-800 w-64"
-            />
-            <input
-              type="text"
-              placeholder="Tempat impianmu?"
-              className="p-3 rounded-md bg-white text-gray-800 w-64"
-            />
+            <div className="relative text-black w-60">
+              <input
+                type="text"
+                placeholder="Pekerjaan impianmu?"
+                className="px-4 py-3 pl-12 rounded-lg bg-white/90 backdrop-blur-sm w-full"
+              />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500" />
+            </div>
+            <div className="relative text-black w-60">
+              <input
+                type="text"
+                placeholder="Klasifikasi pendidikan"
+                className="px-4 py-3 pl-12 rounded-lg bg-white/90 backdrop-blur-sm w-full"
+              />
+              <University className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500" />
+            </div>
+            <div className="relative text-black w-60">
+              <input
+                type="text"
+                placeholder="Tempat impianmu?"
+                className="px-4 py-3 pl-12 rounded-lg bg-white/90 backdrop-blur-sm w-full"
+              />
+              <Tractor className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500" />
+            </div>
           </div>
         </div>
       </div>

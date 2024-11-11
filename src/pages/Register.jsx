@@ -57,7 +57,7 @@ const Register = () => {
               </label>
               <input
                 type="text"
-                placeholder="Enter your name"
+                placeholder="Masukkan nama Anda"
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white focus:ring focus:ring-[#132A13] transition"
               />
             </div>
@@ -68,7 +68,7 @@ const Register = () => {
               </label>
               <input
                 type="text"
-                placeholder="Type your email or phone number"
+                placeholder="Masukkan email atau nomor telepon"
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white focus:ring focus:ring-[#132A13] transition"
               />
             </div>
@@ -80,7 +80,7 @@ const Register = () => {
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
-                  placeholder="Create a password"
+                  placeholder="Masukkan kata sandi baru"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white focus:ring focus:ring-[#132A13] transition"
                 />
                 <button
@@ -100,7 +100,7 @@ const Register = () => {
               <div className="relative">
                 <input
                   type={showConfirmPassword ? "text" : "password"}
-                  placeholder="Confirm your password"
+                  placeholder="Konfirmasi kata sandi"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white focus:ring focus:ring-[#132A13] transition"
                 />
                 <button
