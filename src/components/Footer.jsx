@@ -100,21 +100,18 @@ const Footer = () => {
           </h3>
           <ul className="space-y-2 text-sm">
             {[
-              "Cari lowongan",
-              "Lihat Profil",
-              "Lokasi Pekerjaan",
-              "Jelajahi Perusahaan",
-              "Paling Banyak Dicari",
-              "Lowongan Tersimpan",
-              "Lamaran Pekerjaan",
+              { name: "Cari lowongan", path: "/Job-listing" },
+              { name: "Lihat Profil", path: "/about" },
+              { name: "Lokasi Pekerjaan", path: "/companies" },
+              { name: "Jelajahi Perusahaan", path: "/jelajahi-perusahaan" },
+              { name: "Paling Banyak Dicari", path: "/paling-banyak-dicari" },
+              { name: "Lowongan Tersimpan", path: "/lowongan-tersimpan" },
+              { name: "Lamaran Pekerjaan", path: "/lamaran-pekerjaan" },
             ].map((item, index) => (
               <li key={index} className="flex items-center space-x-2">
                 <GiPlantRoots className="text-yellow-300" />
-                <Link
-                  to={`/${item.toLowerCase().replace(" ", "-")}`}
-                  className="hover:text-yellow-300"
-                >
-                  {item}
+                <Link to={item.path} className="hover:text-yellow-300">
+                  {item.name}
                 </Link>
               </li>
             ))}
@@ -161,7 +158,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 mt-14 ">
         <div className="flex flex-col md:flex-row justify-between items-center text-sm">
           <div className="flex items-center space-x-2 mb-2 md:mb-0">
-            <Link to="/term" className="hover:text-yellow-300">
+            <Link to="/terms" className="hover:text-yellow-300">
               Syarat & Ketentuan
             </Link>
             <span className="text-gray-400">|</span>

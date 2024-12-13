@@ -1,9 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import backgroundImage from "./../assets/img/register-bg.png";
+import api from "../services/api";
 
 const Register = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    role: "farmer",
+  });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -13,6 +23,35 @@ const Register = () => {
 
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const validatePassword = (password) => {
+    return password.length >= 8; // Example: Minimum 8 characters
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("Kata sandi tidak cocok!");
+      return;
+    }
+
+    if (!validatePassword(formData.password)) {
+      toast.error("Kata sandi harus memiliki minimal 8 karakter!");
+      return;
+    }
+
+    try {
+      const response = await api.auth.register(formData);
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Pendaftaran gagal");
+    }
   };
 
   return (
@@ -50,13 +89,17 @@ const Register = () => {
           </h2>
           <p className="text-[#132A13] text-center mb-6">Gratis dan Mudah</p>
 
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit}>
+            {/* Form Fields */}
             <div>
               <label className="block text-gray-700 font-medium mb-1">
                 Nama Lengkap
               </label>
               <input
                 type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
                 placeholder="Masukkan nama Anda"
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white focus:ring focus:ring-[#132A13] transition"
               />
@@ -68,6 +111,9 @@ const Register = () => {
               </label>
               <input
                 type="text"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 placeholder="Masukkan email atau nomor telepon"
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white focus:ring focus:ring-[#132A13] transition"
               />
@@ -80,6 +126,9 @@ const Register = () => {
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
                   placeholder="Masukkan kata sandi baru"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white focus:ring focus:ring-[#132A13] transition"
                 />
@@ -100,6 +149,9 @@ const Register = () => {
               <div className="relative">
                 <input
                   type={showConfirmPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
                   placeholder="Konfirmasi kata sandi"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white focus:ring focus:ring-[#132A13] transition"
                 />
@@ -113,14 +165,21 @@ const Register = () => {
               </div>
             </div>
 
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                className="mr-2 h-4 w-4 text-[#132A13] rounded"
-              />
-              <label className="text-gray-600">
-                Saya menyetujui syarat dan ketentuan
+            <div>
+              <label className="block text-gray-700 font-medium mb-1">
+                Pilih Role
               </label>
+              <select
+                name="role"
+                value={formData.role}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white focus:ring focus:ring-[#132A13] transition"
+              >
+                <option value="farmer">Petani</option>
+                <option value="expert">Pakar</option>
+                <option value="company">Perusahaan</option>
+                <option value="jobSeeker">Pelamar</option>
+              </select>
             </div>
 
             <button
@@ -130,29 +189,14 @@ const Register = () => {
               Daftar
             </button>
 
-            <div className="flex items-center my-4">
-              <hr className="flex-grow border-gray-300" />
-              <span className="px-2 text-gray-500">Atau</span>
-              <hr className="flex-grow border-gray-300" />
-            </div>
-
-            <div className="flex space-x-3">
-              <button className="flex items-center justify-center w-1/2 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
-                <img
-                  src="src/assets/img/google.png"
-                  alt="Google"
-                  className="w-4 h-4 mr-1"
-                />
-                <span className="text-gray-700 font-medium">Google</span>
-              </button>
-              <button className="flex items-center justify-center w-1/2 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
-                <img
-                  src="src/assets/img/apple.png"
-                  alt="Apple"
-                  className="w-4 h-4 mr-1"
-                />
-                <span className="text-gray-700 font-medium">Apple</span>
-              </button>
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                className="mr-2 h-4 w-4 text-[#132A13] rounded"
+              />
+              <label className="text-gray-600">
+                Saya menyetujui syarat dan ketentuan
+              </label>
             </div>
 
             <p className="mt-4 text-center text-gray-700">
@@ -167,6 +211,8 @@ const Register = () => {
           </form>
         </div>
       </div>
+
+      <ToastContainer />
     </div>
   );
 };

@@ -1,19 +1,116 @@
-import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [userInitial, setUserInitial] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsAuthenticated(true);
+      try {
+        const tokenData = JSON.parse(atob(token.split(".")[1]));
+        const email = tokenData.email || "";
+        setUserInitial(email.charAt(0).toUpperCase());
+      } catch (error) {
+        console.error("Error parsing token:", error);
+      }
+    } else {
+      setIsAuthenticated(false);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsAuthenticated(false);
+    setShowProfileMenu(false);
+    navigate("/");
+  };
 
   const isActive = (path) => {
     return location.pathname === path;
   };
 
+  const AuthButtons = () => {
+    if (isAuthenticated) {
+      return (
+        <div className="relative">
+          <button
+            onClick={() => setShowProfileMenu(!showProfileMenu)}
+            className="flex items-center justify-center w-8 h-8 rounded-full bg-yellow-300 text-[#285628] font-medium focus:outline-none"
+          >
+            {userInitial}
+          </button>
+
+          {/* Dropdown Menu */}
+          {showProfileMenu && (
+            <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1 z-50">
+              <Link
+                to="/profile"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                onClick={() => setShowProfileMenu(false)}
+              >
+                Profil Saya
+              </Link>
+              <Link
+                to="/admin"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                onClick={() => setShowProfileMenu(false)}
+              >
+                Dashboard
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+              >
+                Keluar
+              </button>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    return (
+      <>
+        <Link
+          to="/login"
+          className="text-sm font-medium text-white hover:text-yellow-300 transition-colors"
+        >
+          Masuk
+        </Link>
+        <Link
+          to="/register"
+          className="bg-[#4F772D] text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#3d5c23] transition-colors border border-white/20"
+        >
+          Daftar
+        </Link>
+      </>
+    );
+  };
+
+  // Click outside handler
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (showProfileMenu && !event.target.closest(".profile-menu")) {
+        setShowProfileMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showProfileMenu]);
+
   return (
     <nav className="sticky top-0 z-50">
       <div className="bg-gradient-to-r from-[#285628] via-[#4F772D] to-[#132A13] font-poppins">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center h-20 ">
+          <div className="flex justify-between items-center h-20">
             <Link to="/" className="flex items-center space-x-2">
               <img
                 src="src/assets/img/logo-icon.png"
@@ -69,20 +166,9 @@ const Navbar = () => {
               </Link>
             </div>
 
-            {/* Auth Buttons */}
-            <div className="hidden md:flex items-center space-x-4">
-              <Link
-                to="/login"
-                className="text-sm font-medium text-white hover:text-yellow-300 transition-colors"
-              >
-                Masuk
-              </Link>
-              <Link
-                to="/register"
-                className="bg-[#4F772D] text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#3d5c23] transition-colors border border-white/20"
-              >
-                Daftar
-              </Link>
+            {/* Auth Buttons / User Profile */}
+            <div className="hidden md:flex items-center space-x-4 profile-menu">
+              <AuthButtons />
             </div>
 
             {/* Mobile Menu Button */}
@@ -117,44 +203,69 @@ const Navbar = () => {
             to="/"
             className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-yellow-300 hover:bg-[#4F772D]"
           >
-            Home
+            Beranda
           </Link>
           <Link
             to="/job-listing"
             className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-yellow-300 hover:bg-[#4F772D]"
           >
-            Job Listing
+            Daftar Pekerjaan
           </Link>
           <Link
             to="/companies"
             className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-yellow-300 hover:bg-[#4F772D]"
           >
-            Companies
+            Perusahaan
           </Link>
           <Link
             to="/articles"
             className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-yellow-300 hover:bg-[#4F772D]"
           >
-            Articles
+            Artikel
           </Link>
           <Link
             to="/about"
             className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-yellow-300 hover:bg-[#4F772D]"
           >
-            About
+            Tentang
           </Link>
-          <Link
-            to="/login"
-            className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-yellow-300 hover:bg-[#4F772D]"
-          >
-            Login
-          </Link>
-          <Link
-            to="/register"
-            className="block px-3 py-2 rounded-md text-base font-medium bg-[#4F772D] text-white hover:bg-[#3d5c23] border border-white/20"
-          >
-            Register
-          </Link>
+          {!isAuthenticated ? (
+            <>
+              <Link
+                to="/login"
+                className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-yellow-300 hover:bg-[#4F772D]"
+              >
+                Masuk
+              </Link>
+              <Link
+                to="/register"
+                className="block px-3 py-2 rounded-md text-base font-medium bg-[#4F772D] text-white hover:bg-[#3d5c23] border border-white/20"
+              >
+                Daftar
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/profile"
+                className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-yellow-300 hover:bg-[#4F772D]"
+              >
+                Profil Saya
+              </Link>
+              <Link
+                to="/dashboard"
+                className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-yellow-300 hover:bg-[#4F772D]"
+              >
+                Dashboard
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-red-600 hover:bg-[#4F772D]"
+              >
+                Keluar
+              </button>
+            </>
+          )}
         </div>
       </div>
     </nav>

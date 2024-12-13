@@ -1,13 +1,79 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import backgroundImage from "./../assets/img/login-bg.png";
+import api from "../services/api"; 
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    // Basic validation
+    if (!email || !password) {
+      toast.error("Please enter both email and password");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // Call login API
+      const response = await api.auth.login(email, password);
+
+      // Store the token in localStorage
+      localStorage.setItem("token", response.data.token);
+
+      // Decode token to get user role and redirect accordingly
+      const tokenPayload = JSON.parse(atob(response.data.token.split(".")[1]));
+
+      // Redirect based on user role
+      switch (tokenPayload.role) {
+        case "admin":
+          navigate("/");
+          break;
+        case "farmer":
+          navigate("/");
+          break;
+        case "expert":
+          navigate("/");
+          break;
+        default:
+          navigate("/");
+      }
+
+      toast.success("Login successful!");
+    } catch (error) {
+      // Handle different types of errors
+      if (error.response) {
+        switch (error.response.status) {
+          case 401:
+            toast.error("Invalid email or password");
+            break;
+          case 500:
+            toast.error("Server error. Please try again later.");
+            break;
+          default:
+            toast.error("Login failed. Please try again.");
+        }
+      } else if (error.request) {
+        toast.error("No response from server. Check your network connection.");
+      } else {
+        toast.error("An unexpected error occurred");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -47,15 +113,18 @@ const Login = () => {
             Masukkan Data Anda Untuk Masuk
           </p>
 
-          <form className="space-y-6">
+          <form onSubmit={handleLogin} className="space-y-6">
             <div>
               <label className="block text-gray-700 font-medium mb-2">
-                Email atau Kata Sandi
+                Email
               </label>
               <input
-                type="text"
-                placeholder="Masukkan email atau kata sandi"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Masukkan email"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:ring focus:ring-[#132A13] transition"
+                required
               />
             </div>
 
@@ -66,8 +135,11 @@ const Login = () => {
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="Masukkan kata sandi"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:ring focus:ring-[#132A13] transition"
+                  required
                 />
                 <button
                   type="button"
@@ -97,9 +169,14 @@ const Login = () => {
 
             <button
               type="submit"
-              className="w-full bg-[#132A13] text-white py-3 rounded-lg font-semibold text-lg hover:bg-[#0F1D0F] transition-transform transform hover:scale-105"
+              disabled={loading}
+              className={`w-full text-white py-3 rounded-lg font-semibold text-lg transition-transform transform hover:scale-105 ${
+                loading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-[#132A13] hover:bg-[#0F1D0F]"
+              }`}
             >
-              Masuk
+              {loading ? "Memuat..." : "Masuk"}
             </button>
 
             <div className="flex items-center my-6">
@@ -109,7 +186,10 @@ const Login = () => {
             </div>
 
             <div className="flex space-x-4">
-              <button className="flex items-center justify-center w-1/2 py-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+              <button
+                type="button"
+                className="flex items-center justify-center w-1/2 py-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+              >
                 <img
                   src="src\assets\img\google.png"
                   alt="Google"
@@ -117,7 +197,10 @@ const Login = () => {
                 />
                 <span className="text-gray-700 font-medium">Google</span>
               </button>
-              <button className="flex items-center justify-center w-1/2 py-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+              <button
+                type="button"
+                className="flex items-center justify-center w-1/2 py-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+              >
                 <img
                   src="src\assets\img\apple.png"
                   alt="Apple"
@@ -133,7 +216,7 @@ const Login = () => {
                 to="/register"
                 className="text-[#132A13] font-semibold hover:underline"
               >
-                Masuk
+                Daftar
               </Link>
             </p>
           </form>

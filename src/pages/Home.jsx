@@ -180,7 +180,9 @@ const Home = () => {
                   yang inovatif. Kami bertujuan untuk memajukan produktivitas
                   pertanian Indonesia melalui teknologi dan kolaborasi.
                 </p>
+                <Link to="/companies">
                 <PrimaryButton>Tentukan Sekarang</PrimaryButton>
+                </Link>
               </div>
               <div className="absolute right-0 md:right-[10%] max-h-[600px] max-w-[400px] transition-transform hover:scale-105">
                 <img
@@ -302,7 +304,9 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <PrimaryButton>Temukan Lebih</PrimaryButton>
+              <Link to="/faq">
+              <PrimaryButton className="mt-4">Temukan Lebih</PrimaryButton>
+              </Link>
             </div>
           </div>
         </div>
