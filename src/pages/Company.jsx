@@ -1,4 +1,3 @@
-import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -62,16 +61,6 @@ const Company = () => {
                   placeholder="+62 Nomor Telepon"
                   className="p-3 border rounded"
                 />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  className="p-3 border rounded"
-                />
-                <input
-                  type="password"
-                  placeholder="Konfirmasi Kata Sandi"
-                  className="p-3 border rounded"
-                />
                 <button className="bg-yellow-500 text-white font-bold py-3 rounded col-span-2 hover:bg-yellow-600">
                   Daftar Sekarang
                 </button>
@@ -131,7 +120,7 @@ const Company = () => {
                 key={index}
                 className="text-center bg-yellow-300 p-6 rounded-lg shadow-lg"
               >
-                <h2 className="text-3xl font-bold text-green-500 mb-2">
+                <h2 className="text-3xl font-bold text-[#4F772D] mb-2">
                   {stat.value}
                 </h2>
                 <p className="text-gray-600">{stat.label}</p>

@@ -1,5 +1,3 @@
-import React from "react";
-
 const SecondaryButton = ({ children, onClick, className = "" }) => {
   return (
     <button

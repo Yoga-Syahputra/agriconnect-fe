@@ -1,5 +1,3 @@
-import React from "react";
-
 const StatCard = ({ title, value, percentage, icon }) => {
   return (
     <div className="bg-white rounded-xl p-4 shadow-sm">

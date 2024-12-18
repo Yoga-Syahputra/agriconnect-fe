@@ -1,5 +1,3 @@
-import React from "react";
-
 const FilterButton = ({ label, active, onClick }) => {
   return (
     <button

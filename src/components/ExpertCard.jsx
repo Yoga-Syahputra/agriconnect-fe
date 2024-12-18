@@ -1,4 +1,3 @@
-import React from "react";
 import { Badge } from "lucide-react";
 
 const ExpertCard = ({ name, role, image }) => (

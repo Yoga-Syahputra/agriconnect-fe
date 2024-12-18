@@ -9,7 +9,6 @@ const ForgotPassword = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitted(true);
-    // Handle password reset logic here
   };
 
   return (

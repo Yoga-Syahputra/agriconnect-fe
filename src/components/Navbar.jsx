@@ -7,26 +7,25 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-  const [userRole, setUserRole] = useState(""); 
+  const [userRole, setUserRole] = useState("");
 
- useEffect(() => {
-   const token = localStorage.getItem("token");
-   if (token) {
-     setIsAuthenticated(true);
-     try {
-       const tokenData = JSON.parse(atob(token.split(".")[1]));
-       const role = tokenData.role || "User"; 
-       const formattedRole =
-         role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
-       setUserRole(formattedRole);
-     } catch (error) {
-       console.error("Error parsing token:", error);
-     }
-   } else {
-     setIsAuthenticated(false);
-   }
- }, []);
-
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsAuthenticated(true);
+      try {
+        const tokenData = JSON.parse(atob(token.split(".")[1]));
+        const role = tokenData.role || "User";
+        const formattedRole =
+          role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
+        setUserRole(formattedRole);
+      } catch (error) {
+        console.error("Error parsing token:", error);
+      }
+    } else {
+      setIsAuthenticated(false);
+    }
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -35,23 +34,18 @@ const Navbar = () => {
     navigate("/");
   };
 
-  const isActive = (path) => {
-    return location.pathname === path;
-  };
+  const isActive = (path) => location.pathname === path;
 
   const AuthButtons = () => {
     if (isAuthenticated) {
       return (
         <div className="relative">
-          {/* Bubble Text */}
           <div
             onClick={() => setShowProfileMenu(!showProfileMenu)}
             className="flex items-center justify-center px-4 py-2 bg-yellow-300 text-[#285628] font-medium rounded-full cursor-pointer"
           >
             {userRole}
           </div>
-
-          {/* Dropdown Menu */}
           {showProfileMenu && (
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1 z-50">
               <Link
@@ -61,7 +55,7 @@ const Navbar = () => {
               >
                 Profil Saya
               </Link>
-              {userRole === "admin" && ( 
+              {userRole === "Admin" && (
                 <Link
                   to="/admin"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -81,7 +75,6 @@ const Navbar = () => {
         </div>
       );
     }
-
     return (
       <>
         <Link
@@ -95,6 +88,83 @@ const Navbar = () => {
           className="bg-[#4F772D] text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#3d5c23] transition-colors border border-white/20"
         >
           Daftar
+        </Link>
+      </>
+    );
+  };
+
+  const NavigationLinks = () => {
+    if (userRole === "Perusahaan") {
+      return (
+        <>
+          <Link
+            to="/company"
+            className={`text-sm font-medium transition-colors hover:text-yellow-300 ${
+              isActive("/") ? "text-yellow-300" : "text-white"
+            }`}
+          >
+            Beranda
+          </Link>
+          <Link
+            to="/job-market"
+            className={`text-sm font-medium transition-colors hover:text-yellow-300 ${
+              isActive("/job-market") ? "text-yellow-300" : "text-white"
+            }`}
+          >
+            Pasar Kerja
+          </Link>
+          <Link
+            to="/articles"
+            className={`text-sm font-medium transition-colors hover:text-yellow-300 ${
+              isActive("/articles") ? "text-yellow-300" : "text-white"
+            }`}
+          >
+            Artikel
+          </Link>
+        </>
+      );
+    }
+    return (
+      <>
+        <Link
+          to="/"
+          className={`text-sm font-medium transition-colors hover:text-yellow-300 ${
+            isActive("/") ? "text-yellow-300" : "text-white"
+          }`}
+        >
+          Beranda
+        </Link>
+        <Link
+          to="/job-listing"
+          className={`text-sm font-medium transition-colors hover:text-yellow-300 ${
+            isActive("/job-listing") ? "text-yellow-300" : "text-white"
+          }`}
+        >
+          Daftar Pekerjaan
+        </Link>
+        <Link
+          to="/companies"
+          className={`text-sm font-medium transition-colors hover:text-yellow-300 ${
+            isActive("/companies") ? "text-yellow-300" : "text-white"
+          }`}
+        >
+          Perusahaan
+        </Link>
+        <Link
+          to="/articles"
+          className={`text-sm font-medium transition-colors hover:text-yellow-300 ${
+            isActive("/articles") ? "text-yellow-300" : "text-white"
+          }`}
+        >
+          Artikel
+        </Link>
+        <Link
+          to="/about"
+          className={`text-sm font-medium transition-colors hover:text-yellow-300 ${
+            isActive("/about") ? "text-yellow-300" : "text-white"
+          }`}
+        >
+          Tentang
         </Link>
       </>
     );
@@ -115,57 +185,12 @@ const Navbar = () => {
                 Agri<span className="text-yellow-300">Connect</span>
               </span>
             </Link>
-
-            {/* Navigation Links */}
             <div className="hidden md:flex items-center space-x-8">
-              <Link
-                to="/"
-                className={`text-sm font-medium transition-colors hover:text-yellow-300 ${
-                  isActive("/") ? "text-yellow-300" : "text-white"
-                }`}
-              >
-                Beranda
-              </Link>
-              <Link
-                to="/job-listing"
-                className={`text-sm font-medium transition-colors hover:text-yellow-300 ${
-                  isActive("/job-listing") ? "text-yellow-300" : "text-white"
-                }`}
-              >
-                Daftar Pekerjaan
-              </Link>
-              <Link
-                to="/companies"
-                className={`text-sm font-medium transition-colors hover:text-yellow-300 ${
-                  isActive("/companies") ? "text-yellow-300" : "text-white"
-                }`}
-              >
-                Perusahaan
-              </Link>
-              <Link
-                to="/articles"
-                className={`text-sm font-medium transition-colors hover:text-yellow-300 ${
-                  isActive("/articles") ? "text-yellow-300" : "text-white"
-                }`}
-              >
-                Artikel
-              </Link>
-              <Link
-                to="/about"
-                className={`text-sm font-medium transition-colors hover:text-yellow-300 ${
-                  isActive("/about") ? "text-yellow-300" : "text-white"
-                }`}
-              >
-                Tentang
-              </Link>
+              <NavigationLinks />
             </div>
-
-            {/* Auth Buttons / User Profile */}
             <div className="hidden md:flex items-center space-x-4 profile-menu">
               <AuthButtons />
             </div>
-
-            {/* Mobile Menu Button */}
             <button
               className="md:hidden p-2 rounded-lg text-white hover:text-yellow-300"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import JobListing from "./pages/JobListing";
 import Companies from "./pages/Companies";
 import CompanyDetail from "./pages/CompanyDetail";
+import JobMarket from "./pages/JobMarket";
 import Articles from "./pages/Articles";
 import ArticleDetail from "./pages/ArticleDetail";
 import About from "./pages/About";
@@ -15,6 +16,7 @@ import Privacy from "./pages/Privacy";
 import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
+import Transaction from "./pages/Transaction";
 import Worker from "./pages/Worker";
 import ArticleManagement from "./pages/ArticleManagement";
 import AdminSettings from "./pages/AdminSettings";
@@ -29,6 +31,7 @@ function App() {
         <Route path="/job-listing" element={<JobListing />} />
         <Route path="/companies" element={<Companies />} />
         <Route path="/company/:companyName" element={<CompanyDetail />} />
+        <Route path="/job-market" element={<JobMarket />} />
         <Route path="/articles" element={<Articles />} />
         <Route path="/article/:id" element={<ArticleDetail />} />
         <Route path="/about" element={<About />} />
@@ -43,6 +46,7 @@ function App() {
         <Route path="/company/" element={<Company />} />
         <Route path="/admin" element={<Dashboard />} />
         <Route path="/admin/workers" element={<Worker />} />
+        <Route path="/admin/transaction" element={<Transaction />} />
         <Route path="/admin/articles" element={<ArticleManagement />} />
         <Route path="/admin/settings" element={<AdminSettings />} />
         <Route path="*" element={<NotFound />} />

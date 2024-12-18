@@ -1,5 +1,3 @@
-import React from "react";
-
 const JobCard = ({ title, company, location, type, logo }) => {
   return (
     <div className="bg-white rounded-xl p-4 shadow-sm flex items-center justify-between">

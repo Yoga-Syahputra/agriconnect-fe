@@ -1,5 +1,3 @@
-import React from "react";
-
 const SideBackground = ({ image, title, subtitle }) => (
   <div
     className="hidden lg:flex lg:w-1/2 bg-cover bg-center relative"

@@ -1,11 +1,29 @@
-// Pages/Dashboard.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import Sidebar from "../components/Dashboard/Sidebar";
 import StatCard from "../components/Dashboard/StatCard";
 import Chart from "../components/Dashboard/Chart";
 import FilterButton from "../components/Dashboard/FilterButton";
 import JobCard from "../components/Dashboard/JobCard";
 import { Users, Briefcase, Building2, Eye } from "lucide-react";
+
+const jobs = [
+  {
+    id: 1,
+    title: "Project Manager - Hidroponik Sawi",
+    company: "PT. Agro Farmaka Nusantara",
+    location: "Majalengka, Indonesia",
+    type: "Full Time",
+    logo: "../src/assets/img/Companies/agro.png",
+  },
+  {
+    id: 2,
+    title: "Junior Software Engineer",
+    company: "PT. Yafo Agro Indonesia",
+    location: "Jakarta, Indonesia",
+    type: "Full Time",
+    logo: "../src/assets/img/Companies/yafo agro.png",
+  },
+];
 
 const Dashboard = () => {
   const [activeFilter, setActiveFilter] = useState("all");
@@ -101,18 +119,16 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                <div className="space-y-4">
-                  {[1, 2, 3].map((job) => (
-                    <JobCard
-                      key={job}
-                      title="Agricultural Engineer"
-                      company="FarmTech Solutions"
-                      location="Majalengka, Indonesia"
-                      type="Full Time"
-                      logo="/api/placeholder/48/48"
-                    />
-                  ))}
-                </div>
+                {jobs.map((job) => (
+                  <JobCard
+                    key={job.id}
+                    title={job.title}
+                    company={job.company}
+                    location={job.location}
+                    type={job.type}
+                    logo={job.logo}
+                  />
+                ))}
 
                 <button className="w-full mt-6 py-2 text-[#4F772D] font-medium hover:bg-[#4F772D]/5 rounded-lg transition-colors">
                   Lihat Semua Pekerjaan
@@ -120,7 +136,6 @@ const Dashboard = () => {
               </div>
             </div>
           </main>
-
         </div>
       </div>
     </div>

@@ -1,5 +1,3 @@
-import React from "react";
-
 const JobDetails = ({ job }) => {
   return (
     <aside className="w-1/3 bg-white p-6 rounded-lg shadow-lg sticky top-4">

@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { FaUser, FaFileAlt, FaSearch, FaCheck } from "react-icons/fa";
 import { Check } from "lucide-react";

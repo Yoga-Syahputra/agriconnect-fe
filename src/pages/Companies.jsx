@@ -1,4 +1,3 @@
-import React from "react";
 import CompanyCard from "../components/CompanyCard";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
