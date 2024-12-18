@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import backgroundImage from "./../assets/img/login-bg.png";
@@ -40,16 +40,22 @@ const Login = () => {
       // Redirect based on user role
       switch (tokenPayload.role) {
         case "admin":
-          navigate("/");
+          navigate("/admin"); // Redirect to admin dashboard
           break;
-        case "farmer":
-          navigate("/");
+        case "pelamar":
+          navigate("/"); // Redirect to admin dashboard
           break;
-        case "expert":
-          navigate("/");
+        case "petani":
+          navigate("/"); // Redirect to farmer dashboard
+          break;
+        case "ahli":
+          navigate("/"); // Redirect to expert dashboard
+          break;
+        case "perusahaan":
+          navigate("/company"); // Redirect to company page
           break;
         default:
-          navigate("/");
+          navigate("/"); // Default redirection
       }
 
       toast.success("Login successful!");
@@ -179,6 +185,7 @@ const Login = () => {
               {loading ? "Memuat..." : "Masuk"}
             </button>
 
+            {/*
             <div className="flex items-center my-6">
               <hr className="flex-grow border-gray-300" />
               <span className="px-4 text-gray-500">Atau</span>
@@ -209,6 +216,7 @@ const Login = () => {
                 <span className="text-gray-700 font-medium">Apple</span>
               </button>
             </div>
+            */}
 
             <p className="mt-6 text-center text-gray-700">
               Belum punya akun?{" "}

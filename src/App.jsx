@@ -1,9 +1,10 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import JobListing from "./pages/JobListing";
 import Companies from "./pages/Companies";
+import CompanyDetail from "./pages/CompanyDetail";
 import Articles from "./pages/Articles";
+import ArticleDetail from "./pages/ArticleDetail";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -16,6 +17,8 @@ import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
 import Worker from "./pages/Worker";
 import ArticleManagement from "./pages/ArticleManagement";
+import AdminSettings from "./pages/AdminSettings";
+import Company from "./pages/Company";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -25,7 +28,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/job-listing" element={<JobListing />} />
         <Route path="/companies" element={<Companies />} />
+        <Route path="/company/:companyName" element={<CompanyDetail />} />
         <Route path="/articles" element={<Articles />} />
+        <Route path="/article/:id" element={<ArticleDetail />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -35,9 +40,11 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/company/" element={<Company />} />
         <Route path="/admin" element={<Dashboard />} />
         <Route path="/admin/workers" element={<Worker />} />
-        <Route path="/admin/articles" element={<ArticleManagement/>} />
+        <Route path="/admin/articles" element={<ArticleManagement />} />
+        <Route path="/admin/settings" element={<AdminSettings />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

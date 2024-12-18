@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -7,23 +7,26 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-  const [userInitial, setUserInitial] = useState("");
+  const [userRole, setUserRole] = useState(""); 
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsAuthenticated(true);
-      try {
-        const tokenData = JSON.parse(atob(token.split(".")[1]));
-        const email = tokenData.email || "";
-        setUserInitial(email.charAt(0).toUpperCase());
-      } catch (error) {
-        console.error("Error parsing token:", error);
-      }
-    } else {
-      setIsAuthenticated(false);
-    }
-  }, []);
+ useEffect(() => {
+   const token = localStorage.getItem("token");
+   if (token) {
+     setIsAuthenticated(true);
+     try {
+       const tokenData = JSON.parse(atob(token.split(".")[1]));
+       const role = tokenData.role || "User"; 
+       const formattedRole =
+         role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
+       setUserRole(formattedRole);
+     } catch (error) {
+       console.error("Error parsing token:", error);
+     }
+   } else {
+     setIsAuthenticated(false);
+   }
+ }, []);
+
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -40,12 +43,13 @@ const Navbar = () => {
     if (isAuthenticated) {
       return (
         <div className="relative">
-          <button
+          {/* Bubble Text */}
+          <div
             onClick={() => setShowProfileMenu(!showProfileMenu)}
-            className="flex items-center justify-center w-8 h-8 rounded-full bg-yellow-300 text-[#285628] font-medium focus:outline-none"
+            className="flex items-center justify-center px-4 py-2 bg-yellow-300 text-[#285628] font-medium rounded-full cursor-pointer"
           >
-            {userInitial}
-          </button>
+            {userRole}
+          </div>
 
           {/* Dropdown Menu */}
           {showProfileMenu && (
@@ -57,13 +61,15 @@ const Navbar = () => {
               >
                 Profil Saya
               </Link>
-              <Link
-                to="/admin"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                onClick={() => setShowProfileMenu(false)}
-              >
-                Dashboard
-              </Link>
+              {userRole === "admin" && ( 
+                <Link
+                  to="/admin"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  onClick={() => setShowProfileMenu(false)}
+                >
+                  Dashboard
+                </Link>
+              )}
               <button
                 onClick={handleLogout}
                 className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
@@ -93,18 +99,6 @@ const Navbar = () => {
       </>
     );
   };
-
-  // Click outside handler
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (showProfileMenu && !event.target.closest(".profile-menu")) {
-        setShowProfileMenu(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [showProfileMenu]);
 
   return (
     <nav className="sticky top-0 z-50">
@@ -189,83 +183,6 @@ const Navbar = () => {
               </svg>
             </button>
           </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <div
-        className={`absolute w-full bg-[#72AB41] md:hidden transition-transform duration-200 ease-in-out transform ${
-          isMobileMenuOpen ? "translate-y-0" : "-translate-y-full"
-        }`}
-      >
-        <div className="px-4 pt-2 pb-3 space-y-1">
-          <Link
-            to="/"
-            className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-yellow-300 hover:bg-[#4F772D]"
-          >
-            Beranda
-          </Link>
-          <Link
-            to="/job-listing"
-            className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-yellow-300 hover:bg-[#4F772D]"
-          >
-            Daftar Pekerjaan
-          </Link>
-          <Link
-            to="/companies"
-            className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-yellow-300 hover:bg-[#4F772D]"
-          >
-            Perusahaan
-          </Link>
-          <Link
-            to="/articles"
-            className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-yellow-300 hover:bg-[#4F772D]"
-          >
-            Artikel
-          </Link>
-          <Link
-            to="/about"
-            className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-yellow-300 hover:bg-[#4F772D]"
-          >
-            Tentang
-          </Link>
-          {!isAuthenticated ? (
-            <>
-              <Link
-                to="/login"
-                className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-yellow-300 hover:bg-[#4F772D]"
-              >
-                Masuk
-              </Link>
-              <Link
-                to="/register"
-                className="block px-3 py-2 rounded-md text-base font-medium bg-[#4F772D] text-white hover:bg-[#3d5c23] border border-white/20"
-              >
-                Daftar
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link
-                to="/profile"
-                className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-yellow-300 hover:bg-[#4F772D]"
-              >
-                Profil Saya
-              </Link>
-              <Link
-                to="/dashboard"
-                className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-yellow-300 hover:bg-[#4F772D]"
-              >
-                Dashboard
-              </Link>
-              <button
-                onClick={handleLogout}
-                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-red-600 hover:bg-[#4F772D]"
-              >
-                Keluar
-              </button>
-            </>
-          )}
         </div>
       </div>
     </nav>

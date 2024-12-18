@@ -18,7 +18,7 @@ const StatCard = ({ title, value, percentage, icon }) => {
         >
           {percentage}%
         </span>
-        <span className="text-gray-500 text-sm ml-1">vs last month</span>
+        <span className="text-gray-500 text-sm ml-1">vs bulan lalu</span>
       </div>
     </div>
   );

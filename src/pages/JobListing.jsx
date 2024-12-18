@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import JobListings from "../components/JobListings";
@@ -46,9 +47,32 @@ const jobListingsData = [
 
 const JobListing = () => {
   const [selectedJobId, setSelectedJobId] = useState(null);
+  const navigate = useNavigate();
 
   const handleShowDetails = (jobId) => {
     setSelectedJobId(jobId);
+  };
+
+  // Check user authentication
+  const isAuthenticated = () => {
+    const token = localStorage.getItem("token");
+    return !!token;
+  };
+
+  const handleApplyNow = () => {
+    if (!isAuthenticated()) {
+      navigate("/login");
+    } else {
+      alert("Anda berhasil melamar pekerjaan!");
+    }
+  };
+
+  const handleSaveJob = () => {
+    if (!isAuthenticated()) {
+      navigate("/login");
+    } else {
+      alert("Lowongan telah disimpan!");
+    }
   };
 
   const selectedJob = jobListingsData.find((job) => job.id === selectedJobId);
@@ -93,7 +117,12 @@ const JobListing = () => {
         </div>
       </div>
       <main className="flex-grow container mx-auto py-8 flex space-x-8">
-        <JobListings jobs={jobListingsData} onShowDetails={handleShowDetails} />
+        <JobListings
+          jobs={jobListingsData}
+          onShowDetails={handleShowDetails}
+          onApplyNow={handleApplyNow}
+          onSaveJob={handleSaveJob}
+        />
         {selectedJob && <JobDetails job={selectedJob} />}
       </main>
       <Footer />

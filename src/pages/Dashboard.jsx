@@ -12,36 +12,36 @@ const Dashboard = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   const chartData = [
-    { name: "Jan", value: 30 },
-    { name: "Feb", value: 45 },
-    { name: "Mar", value: 35 },
-    { name: "Apr", value: 55 },
-    { name: "May", value: 40 },
-    { name: "Jun", value: 60 },
+    { name: "Jul", value: 0 },
+    { name: "Aug", value: 0 },
+    { name: "Sept", value: 0 },
+    { name: "Okt", value: 1 },
+    { name: "Nov", value: 2 },
+    { name: "Des", value: 3 },
   ];
 
   const stats = [
     {
-      title: "Total Users",
-      value: "2.5k",
+      title: "Total Pengguna",
+      value: "3",
       percentage: 12.5,
       icon: <Users className="text-[#4F772D]" />,
     },
     {
-      title: "Total Jobs",
-      value: "1.2k",
+      title: "Total Pekerjaan",
+      value: "10",
       percentage: 8.2,
       icon: <Briefcase className="text-[#4F772D]" />,
     },
     {
-      title: "Companies",
-      value: "350",
+      title: "Perusahaan",
+      value: "8",
       percentage: -2.4,
       icon: <Building2 className="text-[#4F772D]" />,
     },
     {
-      title: "Page Views",
-      value: "12.5k",
+      title: "Kunjungan",
+      value: "5",
       percentage: 15.8,
       icon: <Eye className="text-[#4F772D]" />,
     },
@@ -74,8 +74,8 @@ const Dashboard = () => {
 
               {/* Charts Section */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                <Chart data={chartData} title="User Growth" />
-                <Chart data={chartData} title="Job Postings" />
+                <Chart data={chartData} title="Perkembangan Pengguna" />
+                <Chart data={chartData} title="Postingan Pekerjaan" />
               </div>
 
               {/* Recent Jobs Section */}

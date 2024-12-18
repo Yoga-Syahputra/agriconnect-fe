@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Search,
   MoreVertical,
@@ -22,35 +22,11 @@ const Worker = () => {
   const workers = [
     {
       id: 1,
-      nama: "Rahman Ridwan",
-      email: "rahmanridwan@protonmail.com",
+      nama: "Lola Maharani Saputri",
+      email: "lolamaharani@gmail.com",
       status: "aktif",
-      avatar: "/api/placeholder/32/32",
-      lokasi: "Bandung, Jawa Barat",
-    },
-    {
-      id: 2,
-      nama: "Siti Aminah",
-      email: "sitiaminah@protonmail.com",
-      status: "nonaktif",
-      avatar: "/api/placeholder/32/32",
+      avatar: "/src/assets/img/Team/Lola Maharani.png",
       lokasi: "Surabaya, Jawa Timur",
-    },
-    {
-      id: 3,
-      nama: "Budi Santoso",
-      email: "budisantoso@protonmail.com",
-      status: "aktif",
-      avatar: "/api/placeholder/32/32",
-      lokasi: "Jakarta Selatan",
-    },
-    {
-      id: 4,
-      nama: "Diana Putri",
-      email: "dianaputri@protonmail.com",
-      status: "menunggu",
-      avatar: "/api/placeholder/32/32",
-      lokasi: "Yogyakarta",
     },
   ];
 
@@ -275,7 +251,7 @@ const Worker = () => {
             </div>
 
             <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
-              <span>Menampilkan 4 dari 50 pekerja</span>
+              <span>Menampilkan 1 dari 1 pekerja</span>
               <button className="px-4 py-2 text-green-700 hover:bg-green-50 rounded-lg transition-colors">
                 Lihat Selengkapnya
               </button>

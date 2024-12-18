@@ -1,4 +1,3 @@
-import React from "react";
 import SecondaryButton from "../components/SecondaryButton";
 
 const JobListings = ({ jobs, onShowDetails }) => {

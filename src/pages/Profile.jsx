@@ -101,7 +101,7 @@ const Profile = () => {
         <div className="bg-white shadow-lg rounded-lg p-6 mb-8">
           <div className="flex items-center justify-center flex-col">
             <img
-              src="https://via.placeholder.com/100"
+              src="src/assets/img/Team/Lola Maharani.png"
               alt="Profile"
               className="w-28 h-28 rounded-full mb-4 transition-transform hover:scale-105"
             />

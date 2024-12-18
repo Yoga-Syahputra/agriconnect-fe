@@ -17,22 +17,16 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const toggleConfirmPasswordVisibility = () => {
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+  const toggleConfirmPasswordVisibility = () =>
     setShowConfirmPassword(!showConfirmPassword);
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const validatePassword = (password) => {
-    return password.length >= 8; // Example: Minimum 8 characters
-  };
+  const validatePassword = (password) => password.length >= 8;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,7 +34,6 @@ const Register = () => {
       toast.error("Kata sandi tidak cocok!");
       return;
     }
-
     if (!validatePassword(formData.password)) {
       toast.error("Kata sandi harus memiliki minimal 8 karakter!");
       return;
@@ -58,8 +51,7 @@ const Register = () => {
     <div className="relative flex h-screen font-poppins">
       <Link
         to="/"
-        className="absolute top-4 left-4 bg-white text-[#132A13] py-2 px-4 rounded-full shadow-md z-20 font-semibold text-lg
-          transition-transform transform hover:bg-[#f0f0f0] hover:shadow-lg hover:scale-105"
+        className="absolute top-4 left-4 bg-white text-[#132A13] py-2 px-4 rounded-full shadow-md z-20 font-semibold text-sm lg:text-lg transition-transform transform hover:bg-[#f0f0f0] hover:shadow-lg hover:scale-105"
       >
         AGRICONNECT
       </Link>
@@ -69,111 +61,112 @@ const Register = () => {
         style={{ backgroundImage: `url(${backgroundImage})` }}
       >
         <div className="absolute inset-0 bg-black opacity-60"></div>
-        <div className="relative z-10 flex flex-col justify-center items-start pl-16 pr-10 py-8 text-white">
-          <h1 className="text-5xl font-extrabold mb-4 leading-snug">
-            Jangkau Lebih Cepat, <br />
+        <div className="relative z-10 flex flex-col justify-center items-start pl-10 pr-8 py-8 text-white">
+          <h1 className="text-4xl lg:text-5xl font-extrabold mb-4 leading-snug">
+            Jangkau Lebih Cepat,
+            <br />
             <span className="font-semibold text-[#FFD700]">Bersama Kami.</span>
           </h1>
-          <p className="text-lg text-gray-300">
+          <p className="text-md lg:text-lg text-gray-300">
             Bergabunglah dengan platform kami dan berdayakan bisnis Anda untuk
             terhubung dengan pelanggan secara instan.
           </p>
         </div>
       </div>
 
-      {/* Right Side - Register Form */}
-      <div className="flex flex-col justify-center items-center w-full lg:w-1/2 bg-white p-6">
-        <div className="w-full max-w-md bg-yellow-500 rounded-3xl p-6 shadow-lg">
-          <h2 className="text-2xl text-center font-bold text-[#132A13] mb-2">
+      <div className="flex flex-col justify-center items-center w-full lg:w-1/2 bg-white p-4 lg:p-6">
+        <div className="w-full max-w-sm bg-yellow-500 rounded-3xl p-4 lg:p-6 shadow-lg">
+          <h2 className="text-xl lg:text-2xl text-center font-bold text-[#132A13] mb-2">
             Buat Akun Baru
           </h2>
-          <p className="text-[#132A13] text-center mb-6">Gratis dan Mudah</p>
+          <p className="text-sm lg:text-md text-[#132A13] text-center mb-4 lg:mb-6">
+            Gratis dan Mudah
+          </p>
 
-          <form className="space-y-4" onSubmit={handleSubmit}>
-            {/* Form Fields */}
-            <div>
-              <label className="block text-gray-700 font-medium mb-1">
-                Nama Lengkap
-              </label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Masukkan nama Anda"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white focus:ring focus:ring-[#132A13] transition"
-              />
-            </div>
-
-            <div>
-              <label className="block text-gray-700 font-medium mb-1">
-                Email atau Nomor Telepon
-              </label>
-              <input
-                type="text"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Masukkan email atau nomor telepon"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white focus:ring focus:ring-[#132A13] transition"
-              />
-            </div>
-
-            <div>
-              <label className="block text-gray-700 font-medium mb-1">
-                Kata Sandi
-              </label>
-              <div className="relative">
+          <form className="space-y-3 lg:space-y-4" onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Nama Lengkap
+                </label>
                 <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  value={formData.password}
+                  type="text"
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
-                  placeholder="Masukkan kata sandi baru"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white focus:ring focus:ring-[#132A13] transition"
+                  placeholder="Nama"
+                  className="w-full px-2 py-2 border border-gray-300 rounded-md bg-white focus:ring focus:ring-[#132A13] transition"
                 />
-                <button
-                  type="button"
-                  onClick={togglePasswordVisibility}
-                  className="absolute inset-y-0 right-3 flex items-center text-gray-600"
-                >
-                  {showPassword ? <FiEyeOff /> : <FiEye />}
-                </button>
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Email/Nomor
+                </label>
+                <input
+                  type="text"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Email"
+                  className="w-full px-2 py-2 border border-gray-300 rounded-md bg-white focus:ring focus:ring-[#132A13] transition"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Kata Sandi
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="Kata Sandi"
+                    className="w-full px-2 py-2 border border-gray-300 rounded-md bg-white focus:ring focus:ring-[#132A13] transition"
+                  />
+                  <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    className="absolute inset-y-0 right-2 flex items-center text-gray-600"
+                  >
+                    {showPassword ? <FiEyeOff /> : <FiEye />}
+                  </button>
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Konfirmasi
+                </label>
+                <div className="relative">
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    placeholder="Konfirmasi"
+                    className="w-full px-2 py-2 border border-gray-300 rounded-md bg-white focus:ring focus:ring-[#132A13] transition"
+                  />
+                  <button
+                    type="button"
+                    onClick={toggleConfirmPasswordVisibility}
+                    className="absolute inset-y-0 right-2 flex items-center text-gray-600"
+                  >
+                    {showConfirmPassword ? <FiEyeOff /> : <FiEye />}
+                  </button>
+                </div>
               </div>
             </div>
 
             <div>
-              <label className="block text-gray-700 font-medium mb-1">
-                Konfirmasi Kata Sandi
-              </label>
-              <div className="relative">
-                <input
-                  type={showConfirmPassword ? "text" : "password"}
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  placeholder="Konfirmasi kata sandi"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white focus:ring focus:ring-[#132A13] transition"
-                />
-                <button
-                  type="button"
-                  onClick={toggleConfirmPasswordVisibility}
-                  className="absolute inset-y-0 right-3 flex items-center text-gray-600"
-                >
-                  {showConfirmPassword ? <FiEyeOff /> : <FiEye />}
-                </button>
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-gray-700 font-medium mb-1">
-                Pilih Role
-              </label>
+              <label className="block text-sm font-medium mb-1">Role</label>
               <select
                 name="role"
                 value={formData.role}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white focus:ring focus:ring-[#132A13] transition"
+                className="w-full px-2 py-2 border border-gray-300 rounded-md bg-white focus:ring focus:ring-[#132A13] transition"
               >
                 <option value="farmer">Petani</option>
                 <option value="expert">Pakar</option>
@@ -184,7 +177,7 @@ const Register = () => {
 
             <button
               type="submit"
-              className="w-full bg-[#132A13] text-white py-2 rounded-lg font-semibold hover:bg-[#0F1D0F] transition-transform transform hover:scale-105"
+              className="w-full bg-[#132A13] text-white py-2 rounded-md font-semibold hover:bg-[#0F1D0F] transition-transform transform hover:scale-105"
             >
               Daftar
             </button>
@@ -194,12 +187,12 @@ const Register = () => {
                 type="checkbox"
                 className="mr-2 h-4 w-4 text-[#132A13] rounded"
               />
-              <label className="text-gray-600">
-                Saya menyetujui syarat dan ketentuan
+              <label className="text-sm text-gray-600">
+                Saya menyetujui syarat & ketentuan
               </label>
             </div>
 
-            <p className="mt-4 text-center text-gray-700">
+            <p className="mt-3 text-center text-sm text-gray-700">
               Sudah punya akun?{" "}
               <Link
                 to="/login"

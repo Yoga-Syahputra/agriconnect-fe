@@ -1,31 +1,38 @@
-import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 const About = () => {
   const teamMembers = [
-    { name: "Danyi Aprizal", role: "Hustler", img: "/path/to/image1.png" },
+    {
+      name: "Danyi Aprizal",
+      role: "Hustler",
+      img: "/src/assets/img/Team/Danyi Aprizal.png",
+    },
     {
       name: "Alhuwaryist Royhan Apriyanto",
       role: "Hipster",
-      img: "/path/to/image2.png",
+      img: "/src/assets/img/Team/Alhuwayrist Royhan.png",
     },
     {
       name: "Mohd. Fiqri Raekhal",
       role: "Hipster",
-      img: "/path/to/image3.png",
+      img: "/src/assets/img/Team/Fiqri Raekhal.png",
     },
     {
       name: "Lola Maharani Saputri",
       role: "Hipster",
-      img: "/path/to/image4.png",
+      img: "/src/assets/img/Team/Lola Maharani.png",
     },
     {
       name: "Yoga Syahputra",
       role: "Hacker & Scrum Master",
-      img: "/path/to/image5.png",
+      img: "/src/assets/img/Team/Yoga Syahputra.png",
     },
-    { name: "Tiara Sonya", role: "Hacker", img: "/path/to/image6.png" },
+    {
+      name: "Tiara Sonya",
+      role: "Hacker",
+      img: "/src/assets/img/Team/Tiara Sonya.png",
+    },
   ];
 
   return (
@@ -35,7 +42,7 @@ const About = () => {
         {/* Hero Section */}
         <div
           className="relative text-center bg-cover bg-center py-20 rounded-lg shadow-md"
-          style={{ backgroundImage: "url('/path/to/hero-bg.jpg')" }}
+          style={{ backgroundImage: "url('/src/assets/img/AgriConnect.png')" }}
         >
           <div className="absolute inset-0 bg-black bg-opacity-50 rounded-lg"></div>
           <div className="relative z-10">
@@ -43,24 +50,40 @@ const About = () => {
               Temukan Perusahaan Impianmu!
             </h1>
             <p className="text-lg text-gray-200 mb-8">
-              Solusi lengkap untuk pencari kerja di industri agraris.
+              Kami adalah jembatan antara talenta berbakat dan peluang besar di
+              industri agraris.
             </p>
-            <button className="bg-green-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-green-700 transition duration-300">
+            <button
+              className="bg-white text-green-900 px-8 py-4 rounded-full text-lg font-semibold hover:bg-yellow-500 transition-colors"
+              onClick={() => {
+                document
+                  .getElementById("about-section")
+                  .scrollIntoView({ behavior: "smooth" });
+              }}
+            >
               Pelajari Lebih Lanjut
             </button>
           </div>
         </div>
 
         {/* About Section */}
-        <div className="bg-white shadow-lg rounded-lg p-8 md:p-12 mt-12">
+        <section
+          id="about-section"
+          className="bg-white shadow-lg rounded-lg p-8 md:p-12 mt-12"
+        >
           <h2 className="text-4xl font-extrabold mb-6 text-center text-green-600">
             Tentang Kami
           </h2>
           <p className="text-lg leading-relaxed text-gray-700 mb-8">
-            AgriConnect adalah platform pencari kerja yang dirancang khusus
-            untuk industri perkebunan dan pertanian...
+            AgriConnect adalah platform inovatif yang dirancang untuk
+            mempertemukan pencari kerja dan pemberi kerja di sektor agraris.
+            Misi kami adalah mendukung perkembangan industri perkebunan dan
+            pertanian dengan menyediakan akses ke talenta berbakat, peluang
+            pelatihan, dan teknologi terkini. Kami percaya bahwa dengan
+            kolaborasi yang tepat, kita bisa membangun masa depan agraris yang
+            lebih cerah.
           </p>
-        </div>
+        </section>
 
         {/* Why Choose AgriConnect */}
         <section className="bg-green-50 p-8 rounded-lg mt-12">
@@ -72,19 +95,28 @@ const About = () => {
               <h3 className="text-xl font-bold text-green-600 mb-4">
                 Akses Langsung ke Tenaga Ahli
               </h3>
-              <p className="text-gray-700">Memungkinkan pemilik usaha...</p>
+              <p className="text-gray-700">
+                Memungkinkan pemilik usaha untuk menemukan tenaga kerja terbaik
+                yang sesuai dengan kebutuhan mereka secara cepat dan efisien.
+              </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md text-center">
               <h3 className="text-xl font-bold text-green-600 mb-4">
                 Konsultasi Virtual & Real-Time
               </h3>
-              <p className="text-gray-700">Menawarkan solusi teknologi...</p>
+              <p className="text-gray-700">
+                Memberikan solusi teknologi terkini untuk komunikasi langsung
+                antara kandidat dan perusahaan melalui platform kami.
+              </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md text-center">
               <h3 className="text-xl font-bold text-green-600 mb-4">
                 Peningkatan Produktivitas
               </h3>
-              <p className="text-gray-700">Meningkatkan pengelolaan lahan...</p>
+              <p className="text-gray-700">
+                Meningkatkan efisiensi pengelolaan lahan dan hasil pertanian
+                dengan mendukung inovasi dan pelatihan berkelanjutan.
+              </p>
             </div>
           </div>
         </section>
@@ -99,13 +131,19 @@ const About = () => {
               <span className="text-green-600 font-bold text-2xl mr-4">
                 2024
               </span>
-              <p>Peluncuran AgriConnect...</p>
+              <p>
+                Peluncuran AgriConnect dengan visi untuk merevolusi industri
+                agraris.
+              </p>
             </div>
             <div className="flex items-center">
               <span className="text-green-600 font-bold text-2xl mr-4">
                 2025
               </span>
-              <p>Kemitraan Pertama dengan Perusahaan Agribisnis...</p>
+              <p>
+                Kemitraan pertama dengan perusahaan agribisnis besar untuk
+                menciptakan dampak luas.
+              </p>
             </div>
           </div>
         </section>
@@ -119,12 +157,12 @@ const About = () => {
             {teamMembers.map((member, index) => (
               <div
                 key={index}
-                className="bg-gray-100 p-6 rounded-lg shadow-md text-center"
+                className="bg-gray-100 p-6 rounded-lg shadow-md text-center hover:shadow-lg transition duration-300"
               >
                 <img
                   src={member.img}
                   alt={member.name}
-                  className="w-24 h-24 mx-auto rounded-full mb-4"
+                  className="w-24 h-24 mx-auto rounded-full mb-4 border-4 border-green-600"
                 />
                 <h3 className="text-xl font-semibold text-gray-800">
                   {member.name}

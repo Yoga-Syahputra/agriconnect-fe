@@ -56,7 +56,7 @@ const Footer = () => {
           <ul className="space-y-2 text-sm">
             <li className="flex items-center space-x-2">
               <GiPlantRoots className="text-yellow-300" />
-              <Link to="/home" className="hover:text-yellow-300">
+              <Link to="/" className="hover:text-yellow-300">
                 Beranda
               </Link>
             </li>

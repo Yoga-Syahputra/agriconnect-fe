@@ -76,7 +76,7 @@ const Articles = () => {
               <p className="text-gray-600 leading-relaxed">
                 {featuredArticle.description}
               </p>
-              <Link to={`/article`}>
+              <Link to={`/article/1`}>
                 <TertiaryButton className="mt-4" />
               </Link>
             </div>
@@ -96,9 +96,9 @@ const Articles = () => {
               </p>
             </div>
             <Link to={`/more-articles`}>
-            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <ArrowRight className="w-6 h-6" />
-            </button>
+              <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                <ArrowRight className="w-6 h-6" />
+              </button>
             </Link>
           </div>
 
