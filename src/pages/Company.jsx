@@ -104,15 +104,15 @@ const Company = () => {
           <div className="container mx-auto px-6 lg:px-20 grid grid-cols-1 lg:grid-cols-3 gap-8">
             {[
               {
-                value: "3 Ribu+",
+                value: "75+",
                 label: "Talenta Profesional",
               },
               {
-                value: "30 Ribu+",
+                value: "80",
                 label: "Perusahaan Menggunakan AgriConnect",
               },
               {
-                value: "3 Ribu+",
+                value: "1200",
                 label: "Kandidat Direkrut oleh Perusahaan",
               },
             ].map((stat, index) => (

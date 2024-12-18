@@ -11,8 +11,8 @@ import Footer from "../components/Footer";
 const Home = () => {
   const stats = [
     { number: "75+", label: "Ahli Tani", icon: "👨‍🌾" },
-    { number: "80", label: "Perusahaan", icon: "🏢" },
-    { number: "1200", label: "Lowongan", icon: "📋" },
+    { number: "10+", label: "Perusahaan", icon: "🏢" },
+    { number: "10", label: "Lowongan", icon: "📋" },
   ];
 
   const processSteps = [
