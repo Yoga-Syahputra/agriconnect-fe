@@ -1,4 +1,4 @@
-import React{ useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { Pencil, Trash2, Plus, Search, X } from "lucide-react";
 import Sidebar from "../components/Dashboard/Sidebar";
