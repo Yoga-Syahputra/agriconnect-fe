@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useLocation, useNavigate } from "react-router-dom"; 
 import {
   LayoutDashboard,
   CircleDollarSign,
@@ -24,8 +24,8 @@ const Sidebar = () => {
       icon: <CircleDollarSign size={20} />,
       path: "/admin/workers",
     },
-    { title: "Pekerjaan", icon: <ClipboardList size={20} />, path: "/tasks" },
-    { title: "Transaksi", icon: <FaMoneyBill size={20} />, path: "/articles" },
+    { title: "Pekerjaan", icon: <ClipboardList size={20} />, path: "/admin/job" },
+    { title: "Transaksi", icon: <FaMoneyBill size={20} />, path: "/admin/transaction" },
     {
       title: "Konten Artikel",
       icon: <BookOpen size={20} />,

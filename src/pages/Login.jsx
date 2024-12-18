@@ -37,45 +37,68 @@ const Login = () => {
       // Decode token to get user role and redirect accordingly
       const tokenPayload = JSON.parse(atob(response.data.token.split(".")[1]));
 
-      // Redirect based on user role
-      switch (tokenPayload.role) {
-        case "admin":
-          navigate("/admin"); // Redirect to admin dashboard
-          break;
-        case "pelamar":
-          navigate("/"); // Redirect to admin dashboard
-          break;
-        case "petani":
-          navigate("/"); // Redirect to farmer dashboard
-          break;
-        case "ahli":
-          navigate("/"); // Redirect to expert dashboard
-          break;
-        case "perusahaan":
-          navigate("/company"); // Redirect to company page
-          break;
-        default:
-          navigate("/"); // Default redirection
-      }
+      // Show success toast
+      toast.success("Login berhasil!", {
+        position: "top-right",
+        theme: "colored",
+        autoClose: 2000,
+      });
 
-      toast.success("Login successful!");
+      // Redirect based on user role with a slight delay to show toast
+      setTimeout(() => {
+        switch (tokenPayload.role) {
+          case "admin":
+            navigate("/admin");
+            break;
+          case "pelamar":
+            navigate("/");
+            break;
+          case "petani":
+            navigate("/");
+            break;
+          case "ahli":
+            navigate("/");
+            break;
+          case "perusahaan":
+            navigate("/company");
+            break;
+          default:
+            navigate("/");
+        }
+      }, 2000);
+
     } catch (error) {
       // Handle different types of errors
       if (error.response) {
         switch (error.response.status) {
           case 401:
-            toast.error("Invalid email or password");
+            toast.error("Email atau kata sandi salah", {
+              position: "top-right",
+              theme: "colored"
+            });
             break;
           case 500:
-            toast.error("Server error. Please try again later.");
+            toast.error("Kesalahan server. Silakan coba lagi nanti.", {
+              position: "top-right",
+              theme: "colored"
+            });
             break;
           default:
-            toast.error("Login failed. Please try again.");
+            toast.error("Login gagal. Silakan coba lagi.", {
+              position: "top-right",
+              theme: "colored"
+            });
         }
       } else if (error.request) {
-        toast.error("No response from server. Check your network connection.");
+        toast.error("Tidak ada respons dari server. Periksa koneksi internet Anda.", {
+          position: "top-right",
+          theme: "colored"
+        });
       } else {
-        toast.error("An unexpected error occurred");
+        toast.error("Terjadi kesalahan yang tidak terduga", {
+          position: "top-right",
+          theme: "colored"
+        });
       }
     } finally {
       setLoading(false);
@@ -116,7 +139,7 @@ const Login = () => {
             Selamat Datang di AgriConnect!
           </h2>
           <p className="text-[#132A13] text-center mb-8">
-            Masukkan Data Anda Untuk Masuk
+            Masukkan Data Anda untuk Masuk
           </p>
 
           <form onSubmit={handleLogin} className="space-y-6">

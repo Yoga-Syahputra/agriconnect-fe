@@ -104,7 +104,7 @@ const Company = () => {
           <div className="container mx-auto px-6 lg:px-20 grid grid-cols-1 lg:grid-cols-3 gap-8">
             {[
               {
-                value: "3 juta+",
+                value: "3 Ribu+",
                 label: "Talenta Profesional",
               },
               {

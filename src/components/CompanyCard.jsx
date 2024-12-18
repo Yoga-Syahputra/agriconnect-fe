@@ -5,7 +5,6 @@ const CompanyCard = ({ logo, name, category, location }) => {
   const navigate = useNavigate();
 
   const handleViewDetails = () => {
-    // Arahkan ke halaman detail perusahaan
     navigate(`/company/${encodeURIComponent(name)}`);
   };
 

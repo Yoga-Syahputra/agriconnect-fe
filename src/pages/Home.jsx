@@ -107,13 +107,13 @@ const Home = () => {
       id: 3,
       name: "PT. YAFO AGRO INDONESIA",
       logo: "/src/assets/img/Companies/yafo agro.png",
-      jobCount: 9,
+      jobCount: 2,
     },
     {
       id: 4,
       name: "PT. AGRIKULTUR GEMILANG INDONESIA",
       logo: "/src/assets/img/Companies/agrikultur.png",
-      jobCount: 9,
+      jobCount: 2,
     },
   ];
 
@@ -133,7 +133,7 @@ const Home = () => {
                 <span className="text-yellow-400">Connect</span>
               </h1>
               <p className="text-xl mb-8 max-w-2xl text-center">
-                Temukan peluang karir terbaik di industri pertanian
+                Temukan peluang karir terbaik di industri perkebunan & pertanian
               </p>
               <Link to="/job-listing">
                 <button className="bg-white text-green-900 px-8 py-4 rounded-full text-lg font-semibold hover:bg-yellow-500 transition-colors">

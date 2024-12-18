@@ -17,11 +17,13 @@ import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
 import Transaction from "./pages/Transaction";
+import JobPage from "./pages/JobPage";
 import Worker from "./pages/Worker";
 import ArticleManagement from "./pages/ArticleManagement";
 import AdminSettings from "./pages/AdminSettings";
 import Company from "./pages/Company";
 import NotFound from "./pages/NotFound";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -44,11 +46,48 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/company/" element={<Company />} />
-        <Route path="/admin" element={<Dashboard />} />
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
         <Route path="/admin/workers" element={<Worker />} />
-        <Route path="/admin/transaction" element={<Transaction />} />
-        <Route path="/admin/articles" element={<ArticleManagement />} />
-        <Route path="/admin/settings" element={<AdminSettings />} />
+        <Route
+          path="/admin/transaction"
+          element={
+            <PrivateRoute>
+              <Transaction />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin/job"
+          element={
+            <PrivateRoute>
+              <JobPage />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/admin/articles"
+          element={
+            <PrivateRoute>
+              <ArticleManagement />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/admin/settings"
+          element={
+            <PrivateRoute>
+              <AdminSettings />
+            </PrivateRoute>
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
