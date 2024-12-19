@@ -179,7 +179,7 @@ const Navbar = () => {
           <div className="flex justify-between items-center h-20">
             <Link to="/" className="flex items-center space-x-2">
               <img
-                src="src/assets/img/logo-icon.png"
+                src="src/assets/img/icon.png"
                 alt="AgriConnect Logo"
                 className="h-5 w-5"
               />
